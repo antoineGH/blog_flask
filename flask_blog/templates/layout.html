@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='main.css') }}>
+    {% if title %}
+    <title>Flask Blog - {{ title }}</title>
+    {% else %}
+    <title>Flask Blog</title>
+    {% endif %}
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/ico" sizes="16x16">
+</head>
+<header class="site-header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{{url_for('home')}}"><img class="navbar-logo mb-2" src="{{ url_for('static', filename='logo.png') }}" alt="logo_main"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{{url_for('home')}}">Home</a>
+                    <a class="nav-item nav-link" href="{{url_for('about')}}">About</a>
+                </div>
+                <div class="navbar-nav">
+                    {% if current_user.is_authenticated %}
+                    <a class="nav-item nav-link text-white" href="{{url_for('account')}}">{{ current_user.email }}</a>
+                    <a class="nav-item nav-link text-white" href="{{url_for('new_post')}}">New Post</a>
+                    <a class="nav-item nav-link" href="{{url_for('logout')}}">Logout</a>
+                    {% else %}
+                    <a class="nav-item nav-link" href="{{url_for('login')}}">Login</a>
+                    <a class="nav-item nav-link" href="{{url_for('register')}}">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Jumbotron -->
+    <div class="jumbotron jumbotron-fluid" style="background:url({{url_for('static', filename='ubuntu_bg.jpg')}}) no-repeat; background-size: cover;">
+        <div class="text-white text-center bg-transparent my-5">
+            <h1 class="display-4 administration_title">Administration made easy</h1>
+            <p class="d-none d-md-block">On templars.guru you can find all my ongoing IT projects</p>
+        </div>
+    </div>
+</header>
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4">
+            <div class="content-section">
+                <h3>Sidebar</h3>
+                <p class='text-muted'>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-light">Latest Posts</li>
+                        <li class="list-group-item list-group-item-light">Announcements</li>
+                        <li class="list-group-item list-group-item-light">Calendars</li>
+                        <li class="list-group-item list-group-item-light">etc</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<!-- Footer -->
+<div class="contain-fluid bg-dark fixed-bottom">
+    <div class="row justify-content-center">
+        <!-- Contact Me Section -->
+        <div class="col-10 col-md-4 text-light" id="contact_me">
+            <div class="text-white text-center bg-transparent my-2">
+                <h4 class="display-5 administration_title">Contact Me.</h4>
+                <h6 class="mt-2 font-weight-light text-center text-left administration_title">I'd love to hear from you, if you have any question, feel free to get in touch.</h6>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-left mt-2">
+        <div class="col-10 col-md text-right">
+            <a href="https://github.com/antoineratat/" class="fa fa-lg fa-github align-self-start" target="_blank" aria-hidden="true"></a><br>
+        </div>
+        <div class="col-10 col-md text-left">
+            <a href="https://www.linkedin.com/in/antoineratat/" class="fa fa-lg fa-linkedin align-self-start" target="_blank"></a>
+        </div>
+    </div>
+    <div class="row justify-content-center fi">
+        <footer class="text-center text-white mt-3 mb-1">2020 - Templars</footer>
+    </div>
+</div>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>

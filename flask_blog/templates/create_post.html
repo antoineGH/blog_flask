@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <label for="form-row">
+                    <h5>{{ legend }}</h5>
+                </label>
+                <div class="form-row">
+                    <div class="col-12">
+                        {{ form.title.label(class="form-control-label") }}
+                        {% if form.title.errors %}
+                        {{ form.title(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.title(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                    <div class="col-12 mt-2">
+                        {{ form.content.label(class="form-control-label") }}
+                        {% if form.content.errors %}
+                        {{ form.content(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.content.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.content(rows='12',cols='12', class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group mt-3">
+                {{ form.submit(class="btn btn-dark") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}
