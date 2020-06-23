@@ -6,10 +6,10 @@ from flask_login import current_user
 from flask_blog.models import User
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=20)], render_kw={"placeholder": "Enter username"})
-    email = StringField('Email address', validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter email"})
-    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Enter password"})
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], render_kw={"placeholder": "Enter password"})
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=20)], render_kw={"placeholder": "Enter Username"})
+    email = StringField('Email address', validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter Email"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Enter Password"})
+    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], render_kw={"placeholder": "Enter Password"})
     submit = SubmitField('Register')
 
     def validate_username(self, username):
@@ -23,8 +23,8 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('That email is taken. Please choose a different one.')
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter email"})
-    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Enter password"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter Email"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Enter Password"})
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
@@ -47,8 +47,8 @@ class UpdateAccountForm(FlaskForm):
                 raise ValidationError('That email is taken. Please choose a different one.')
 
 class RequestResetForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email"})
-    submit = SubmitField('Request Password Reset')
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Enter Email"})
+    submit = SubmitField('Reset Password')
 
     def validate_email(self, email):
        user = User.query.filter_by(email=email.data).first()

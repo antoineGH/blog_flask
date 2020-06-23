@@ -1,22 +1,35 @@
 {% extends 'layout.html' %}
 {% block content %}
-<article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file)}}" alt="Profile Picture" />
-    <div class="media-body">
-        <div class="article-metadata">
-            <a class="mr-2" href="{{url_for('users.user_posts', email=post.author.email)}}">{{ post.author.email }}</a>
-            <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+
+ <!-- Post Content -->
+ <div class="col-12 col-lg-10 col-md-10 mx-auto">
+ <article>
+    <div class="container text-left">
+      <div class="row">
+        <div class="col-lg-10 col-md-10 mx-auto text-center text-md-left">
             {% if post.author == current_user %}
-            <div>
-                <a class="btn btn-primary btn-sm mt-1 mb-2" href="{{ url_for('posts.update_post', post_id=post.id) }}">Udpate</a>
-                <button class="btn btn-danger btn-sm mt-1 mb-2" data-toggle="modal" data-target="#deleteModal">Delete</button>
-            </div>
-            {% endif %}
+                <a class="btn btn-primary btn-sm mt-1 mb-4" href="{{ url_for('posts.update_post', post_id=post.id) }}">Udpate</a>
+                <button class="btn btn-danger btn-sm mt-1 mb-4" data-toggle="modal" data-target="#deleteModal">Delete</button>
+           {% endif %}
+          <h2 style="font-size: 36px;" class="post-title">{{ post.title }}</h2>
+          <p class="text-justify">{{ post.content }}</p>
         </div>
-        <h2 class="artible-title">{{ post.title }}</h2>
-        <p class="article-content">{{ post.content }}</p>
+      </div>
+      <div class="row text-md-left text-center justify-content-center justify-content-md-left ml-md-5">
+        <div class="col-10 col-lg-1 col-md-2">
+            <img class="rounded-circle article-img ml-md-2" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file)}}" alt="Profile Picture" />
+        </div>
+        <div class="col-lg-10 col-md-10 mx-auto">
+            <div class="post-preview">
+                <p class="post-meta mt-3 mt-md-4 ml-md-1">Posted by
+                <a href="{{url_for('users.user_posts', email=post.author.email)}}">{{ post.author.email }}</a>
+                on {{ post.date_posted.strftime('%B %d, %Y') }}</p>       
+            </div>
+        </div>     
+      </div>
     </div>
-</article>
+  </article>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
