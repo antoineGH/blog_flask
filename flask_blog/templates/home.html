@@ -1,24 +1,24 @@
 {% extends 'layout.html' %}
 {% block content %}
-
-<div class="col-12 col-lg-10 col-md-10 mx-auto">
+<div class="container-fluid">
+<div class="col-12 col-xl-8 col-lg-10 col-md-12 mx-auto col_posts">
 	{% for post in posts.items %}
-	<div class="row">
-		<div class="col-md-1 mr-md-5">
-			<img class="rounded-circle article-img mt-5 d-none d-md-block" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file)}}" alt="Profile Picture" />
+	<div class="row justify-content-center">
+		<div class="col-md-5 col-lg-4 col-xl-4 my-auto text-center justify-content-center">
+			<img class="post_picture" src="{{url_for('static', filename='post_pics/' +  post.image_file)}}" alt="Post Picture" />
 		</div>
-		<div class="col-12 col-md-10 ml-2">
+		<div class="col-12 col-md-7 col-lg-8 col-xl-6 my-auto">
 			<div class="post-preview">
 			  <a href="{{ url_for('posts.post', post_id=post.id) }}">
 				<h2 class="post-title">
 					{{ post.title }}
 				</h2>
 				<h3 class="post-subtitle">
-					{{ post.content }}
+					{{ post.excerpt }}
 				</h3>
 			  </a>
 			  <p class="post-meta font-weight-normal mt-2 mt-md-0">Posted by
-				<a href="{{url_for('users.user_posts', email=post.author.email)}}">{{ post.author.email }}</a>
+				<a href="{{url_for('users.user_posts', email=post.author.email)}}">{{ post.author.username }}</a>
 				on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
 			</div>
 		</div>
@@ -40,10 +40,11 @@
 			...
 		{% endif %}
 		{% endfor %}
-		{% endblock content %}
 	  </div>
 	</div>
 </div>
+</div>
+{% endblock content %}
 
 
 	

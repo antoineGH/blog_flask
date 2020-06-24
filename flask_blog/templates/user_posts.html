@@ -1,28 +1,57 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <h4 class="mb-3">Post by {{ user.email }} (Total: {{ posts.total }})</h4>
-	{% for post in posts.items %}
-<article class="media content-section">
-    <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file)}}" alt="Profile Picture" />
-    <div class="media-body">
-        <div class="article-metadata">
-            <a class="mr-2" href="{{url_for('users.user_posts', email=post.author.email)}}">{{ post.author.email }}</a>
-            <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+<div class="container-fluid">
+	<div class="row mb-md-3 text-center justify-content-center">
+		<div class="col-12 col-md-1 my-auto">
+			<img class="rounded-circle d-none d-lg-block account-img" src="{{url_for('static', filename='profile_pics/' +  user.image_file)}}">
+		</div>
+		<div class="col-12 col-md-2 my-auto">
+			<h5>Posted by {{ user.username }}</h5>
+		</div>
+	</div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8 col-md-8 mx-auto col_posts">
+            {% for post in posts.items %}
+            <div class="row justify-content-center">
+                <div class="col-md-3 my-auto">
+                    <img class="post_picture d-none d-md-block" src="{{url_for('static', filename='post_pics/' +  post.image_file)}}" alt="Post Picture" />
+                </div>
+                <div class="col-12 col-md-6 my-auto">
+                    <div class="post-preview">
+                        <a href="{{ url_for('posts.post', post_id=post.id) }}">
+                            <h2 class="post-title">
+                                {{ post.title }}
+                            </h2>
+                            <h3 class="post-subtitle">
+                                {{ post.excerpt }}
+                            </h3>
+                        </a>
+                        <p class="post-meta font-weight-normal mt-2 mt-md-0">Posted by
+                            <a href="{{url_for('users.user_posts', email=post.author.email)}}">{{ post.author.username }}</a>
+                            on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {% endfor %}
+            <!-- Pager -->
+            <div class="row justify-content-center mt-4">
+                <div class="clearfix">
+                    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                    {% if posts.page == page_num %}
+                    <a class="btn btn-pagination_active mb-4" href="{{ url_for('users.user_posts', email=user.email, page=page_num)}}">{{ page_num }}</a>
+                    {% else %}
+                    <a class="btn btn-pagination mb-4" href="{{ url_for('users.user_posts', email=user.email, page=page_num)}}">{{ page_num }}</a>
+                    {% endif %}
+                    {% else %}
+                    ...
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-        <h2><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
-        <p class="article-content">{{ post.content }}</p>
     </div>
-</article>
-	{% endfor %}
-	{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-		{% if page_num %}
-			{% if posts.page == page_num %}
-<a class="btn btn-secondary mb-4" href="{{ url_for('users.user_posts', email=user.email, page=page_num)}}">{{ page_num }}</a>
-			{% else %}
-<a class="btn btn-outline-secondary mb-4" href="{{ url_for('users.user_posts', email=user.email, page=page_num)}}">{{ page_num }}</a>
-			{% endif %}
-		{% else %}
-			...
-		{% endif %}
-	{% endfor %}
+</div>
+</div>
 {% endblock content %}
