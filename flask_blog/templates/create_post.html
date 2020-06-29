@@ -41,6 +41,20 @@
                     <div class="form-row mt-3 mt-md-2">
                         <div class="col-12 col-md-12 mx-auto">
                             <h3 class="post-subtitle font-weight-normal mt-4 text-left" style="font-size: 1.25rem;">{{ form.content.label }}</h3>
+                            <div class="row" class="font-weight-normal text-center justify-content-center mx-auto" style="font-size: 0.90rem; font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;">
+                                <div class="col-10 col-md-auto">
+                                    &lth3&gt Title &lt/h3&gt
+                                </div>
+                                <div class="col-10 col-md-auto">
+                                    &ltcode&gt Code &lt/code&gt
+                                </div>
+                                <div class="col-10 col-md-auto">
+                                    &ltimg src="url_img"&gt
+                                </div>
+                                <div class="col-10 col-md-auto">
+                                    &ltb&gt Bold Text&lt/b&gt
+                                </div>
+                            </div>
                             {% if form.content.errors %}
                             {{ form.content(class="form-control is-invalid") }}
                             <div class="invalid-feedback">
@@ -49,7 +63,7 @@
                                 {% endfor %}
                             </div>
                             {% else %}
-                            {{ form.content(rows='12',cols='12', class="form-control") }}
+                            {{ form.content(rows='12',cols='12', class="form-control mt-3") }}
                             {% endif %}
                         </div>
                     </div>

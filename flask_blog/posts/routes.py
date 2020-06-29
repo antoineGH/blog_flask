@@ -1,4 +1,4 @@
-from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
+from flask import render_template, url_for, flash, redirect, request, abort, Blueprint, Markup
 from flask_login import current_user, login_required
 from flask_blog import db
 from flask_blog.models import Post
@@ -12,6 +12,10 @@ posts = Blueprint('posts', __name__)
 def new_post():
     form = PostForm()
 
+    if current_user.admin == 0:
+        flash("Account not verified. Please wait a few hours for activation.", 'error')
+        return redirect( url_for('main.home'))
+
     if form.validate_on_submit():
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
@@ -20,14 +24,15 @@ def new_post():
             post_db = Post(title=form.title.data, excerpt=form.excerpt.data, content=form.content.data, author=current_user)
         db.session.add(post_db)
         db.session.commit()
-        flash('Your Post has been created!', 'success')
-        return redirect(url_for('main.home'))
+        flash('Post Created. Your Post has been created!', 'success')
+        return redirect( url_for('main.home'))
     return render_template('create_post.html', title='New Post', form=form, legend='New Post')
 
 @posts.route('/post/<int:post_id>')
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
+    content = Markup(post.content)
+    return render_template('post.html', post=post, value=content)
 
 @posts.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
 @login_required
@@ -48,8 +53,8 @@ def update_post(post_id):
         post.excerpt = form.excerpt.data
         post.content = form.content.data
         db.session.commit()
-        flash('You post has been updated!', 'success')
-        return redirect(url_for('posts.post', post_id=post.id))
+        flash('Post Updated. Your post has been updated!', 'success')
+        return redirect( url_for('posts.post', post_id=post.id))
 
     
     form.title.data = post.title
@@ -67,5 +72,5 @@ def delete_post(post_id):
     
     db.session.delete(post)
     db.session.commit()
-    flash('You post has been deleted!', 'success')
-    return redirect(url_for('main.home'))
+    flash('Post Deleted. Your post has been deleted!', 'success')
+    return redirect( url_for('main.home'))

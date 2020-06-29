@@ -1,14 +1,13 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="container-fluid">
-<div class="col-12 col-xl-8 col-lg-10 col-md-12 mx-auto col_posts">
+<div class="col-12 col-xl-9 col-lg-10 col-md-12 mx-auto col_posts">
 	{% for post in posts.items %}
 	<div class="row justify-content-center">
 		<div class="col-md-5 col-lg-4 col-xl-4 my-auto text-center justify-content-center">
-
 			<div class="container_zoom">
 				<div class="img-hover-zoom--zoom-n-rotate img">
-					<img class="img_test" src="{{url_for('static', filename='post_pics/' +  post.image_file)}}" alt="Post Picture">
+					<img class="img_test" src="{{ url_for('static', filename='post_pics/' +  post.image_file)}}" alt="Post Picture">
 				</div>
 			</div>
 		</div>
@@ -23,7 +22,7 @@
 				</h3>
 			  </a>
 			  <p class="post-meta font-weight-normal mt-2 mt-md-0">Posted by
-				<a href="{{url_for('users.user_posts', email=post.author.email)}}">{{ post.author.username }}</a>
+				<a href="{{ url_for('users.user_posts', email=post.author.email)}}">{{ post.author.username }}</a>
 				on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
 			</div>
 		</div>
@@ -49,6 +48,7 @@
 	</div>
 </div>
 </div>
+
 {% endblock content %}
 
 
