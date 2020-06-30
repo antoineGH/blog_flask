@@ -1,4 +1,5 @@
 from datetime import datetime
+import flask_whooshalchemy as whooshalchemy
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
 from flask import current_app
@@ -35,6 +36,8 @@ class User(db.Model, UserMixin):
 
 
 class Post(db.Model):
+    __searchable__ = ['title', 'content']
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     excerpt = db.Column(db.String(100), nullable=False)
@@ -46,3 +49,5 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}')"
+
+whooshalchemy.whoosh_index(current_app, Post)
