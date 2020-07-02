@@ -3,11 +3,17 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_blog import db, bcrypt
 from flask_blog.models import User, Post
 from flask_blog.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from flask_blog.posts.forms import SearchForm
 from flask_blog.users.utils import save_picture, send_reset_email
 
 users = Blueprint('users', __name__)
 
-@users.route('/register', methods=['GET','POST'])
+@users.context_processor
+def context_processor():
+    searchform = SearchForm()
+    return {'searchform': searchform}
+
+@users.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect( url_for('main.home'))

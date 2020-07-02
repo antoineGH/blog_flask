@@ -2,10 +2,15 @@ from flask import render_template, url_for, flash, redirect, request, abort, Blu
 from flask_login import current_user, login_required
 from flask_blog import db
 from flask_blog.models import Post
-from flask_blog.posts.forms import PostForm
+from flask_blog.posts.forms import PostForm, SearchForm
 from flask_blog.posts.utils import save_picture
 
 posts = Blueprint('posts', __name__)
+
+@posts.context_processor
+def context_processor():
+    searchform = SearchForm()
+    return {'searchform': searchform}
 
 @posts.route('/post/new', methods=['GET', 'POST'])
 @login_required

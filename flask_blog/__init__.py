@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import Flask, g
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_blog.config import Config
-
+from flask_blog.posts.forms import SearchForm
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -23,6 +23,7 @@ def create_app(config_class=Config):
     with app.test_request_context():
         from flask_blog.models import User, Post
         db.create_all()
+        
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
