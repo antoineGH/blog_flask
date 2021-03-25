@@ -103,7 +103,7 @@ $ exit()
 
 ### New Post
 
-![Login Screenshot](https://github.com/antoineratat/blog_flask/blob/master/screenshots/1.PNG?raw=true)
+![Login Screenshot](https://github.com/antoineratat/blog_flask/blob/master/screenshots/2.PNG?raw=true)
 
 ### Post Content Preview
 
