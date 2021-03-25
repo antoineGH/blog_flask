@@ -99,12 +99,12 @@ $ exit()
 
 ### Main Page
 
-![Login Screenshot](https://github.com/antoineratat/shipping_flask/blob/master/screenshots/1.PNG?raw=true)
+![Login Screenshot](https://github.com/antoineratat/blog_flask/blob/master/screenshots/1.PNG?raw=true)
 
 ### New Post
 
-![Login Screenshot](https://github.com/antoineratat/shipping_flask/blob/master/screenshots/2.PNG?raw=true)
+![Login Screenshot](https://github.com/antoineratat/blog_flask/blob/master/screenshots/1.PNG?raw=true)
 
 ### Post Content Preview
 
-![Login Screenshot](https://github.com/antoineratat/shipping_flask/blob/master/screenshots/7.PNG?raw=true)
+![Login Screenshot](https://github.com/antoineratat/blog_flask/blob/master/screenshots/3.PNG?raw=true)
