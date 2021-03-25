@@ -3,10 +3,9 @@
 ## Table of contents
 
 -   [General info](#general-info)
--   [Technical Details](#technical-details)
--   [Screenshots](#screenshots)
 -   [Technologies](#technologies)
 -   [Setup](#setup)
+-   [Screenshots](#screenshots)
 
 ## General info
 
