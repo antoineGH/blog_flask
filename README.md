@@ -98,12 +98,12 @@ $ exit()
 
 ### Main Page
 
-![Login Screenshot](https://github.com/antoineratat/blog_flask/blob/master/screenshots/1.PNG?raw=true)
+![Login Screenshot](https://templars.guru/app/github/blog_flask/1.PNG)
 
 ### New Post
 
-![Login Screenshot](https://github.com/antoineratat/blog_flask/blob/master/screenshots/2.PNG?raw=true)
+![Login Screenshot](https://templars.guru/app/github/blog_flask/2.PNG)
 
 ### Post Content Preview
 
-![Login Screenshot](https://github.com/antoineratat/blog_flask/blob/master/screenshots/3.PNG?raw=true)
+![Login Screenshot](https://templars.guru/app/github/blog_flask/3.PNG)
